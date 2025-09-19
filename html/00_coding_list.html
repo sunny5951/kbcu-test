@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      /* reset */
+      html,
+      body,
+      div,
+      span,
+      object,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      a,
+      button,
+      abbr,
+      address,
+      img,
+      q,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      footer,
+      header,
+      section,
+      summary {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+      }
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      /* HTML5 display-role reset for older browsers */
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+      img {
+        border: none;
+        vertical-align: top;
+      }
+      address {
+        font-style: normal;
+      }
+      button {
+        display: inline-block;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      input,
+      button,
+      a,
+      select,
+      option {
+        font-family: inherit;
+        font-size: inherit;
+      }
+      input[type="checkbox"] {
+        border: none !important;
+      }
+      /* for lte IE10 */
+      input[type="radio"] {
+        border: none !important;
+      }
+      /* for lte IE10 */
+      caption {
+        text-align: left;
+        margin-bottom: 7px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      /* common */
+      body,
+      html,
+      pre {
+        font-family: "맑은 고딕", "Malgun Gothic", Dotum, sans-serif;
+        font-size: 14px;
+        color: #333;
+        letter-spacing: -0.045em !important;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      #wrap {
+        padding-bottom: 100px;
+      }
+      h1 {
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 20px 0 10px;
+      }
+      table {
+        width: 98%;
+        margin: 20px auto 0;
+      }
+      table tr:hover td {
+        background-color: #faec67 !important;
+      }
+      th {
+        background: #333;
+        color: #fff;
+      }
+      th,
+      td {
+        height: 30px;
+        border-bottom: 1px solid #333;
+        border-left: 1px solid #333;
+        text-align: center;
+      }
+      td .red {
+        color: red;
+      }
+      th:first-child,
+      td:first-child {
+      }
+      tr a:focus {
+        color: red;
+      }
+      tr.orange td {
+        background-color: #f3dac9 !important;
+      }
+      tr.green td {
+        background-color: #dafada !important;
+      }
+      tr.purple td {
+        background-color: #e4dcfa !important;
+      }
+      tr.yellow td {
+        background-color: #ffffe3 !important;
+      }
+      tr.red td {
+        background-color: #ffe6e7 !important;
+      }
+      tr.blue td {
+        background-color: #d9f0fb !important;
+      }
+      tr.brown td {
+        background-color: #ebe4dd !important;
+      }
+      #tableTotal tr {
+        border: 1px solid #333;
+      }
+      #tableTotal td {
+        padding: 4px;
+        padding-left: 10px;
+        border: 1px solid #333;
+        background-color: #fff;
+        text-align: left;
+      }
+      .complete {
+        color: #1f4d87;
+        font-weight: 800;
+      }
+      .undone {
+        color: #ec2127;
+        font-weight: 800;
+      }
+      .modify {
+        margin-top: 5px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 5px;
+        border: 1px dotted #000;
+        font-size: 13px;
+        background-color: #ccc;
+      }
+      .modify h2 {
+        margin-bottom: 3px;
+      }
+    </style>
+    <!-- script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(window).load(function () {
+        // Work Progress
+        var arrTitle = new Array("task", "dev");
+        var intDone, intUnDone, intTotal;
+        for (var i = 0; i < arrTitle.length; i++) {
+          intDone = intUnDone = intTotal = 0;
+          $("#tableSheet tr td." + arrTitle[i]).each(function () {
+            if ($(this).hasClass("done")) {
+              intDone++;
+            }
+            if ($(this).hasClass("undone")) {
+              intUnDone++;
+            }
+            intTotal++;
+          });
+          $("#tableTotal td").eq(i).find(".done").text(intDone);
+          $("#tableTotal td").eq(i).find(".undone").text(intUnDone);
+          $("#tableTotal td").eq(i).find(".total").text(intTotal);
+        }
+
+        // TotalCount
+        $("#spanTotalCount").html($("#tableSheet tr td.task").length);
+        $(window).bind("scroll", function () {
+          var navHeight = 0;
+          if ($(window).scrollTop() > navHeight) {
+            $(".navList").addClass("fixed");
+          } else {
+            $(".navList").removeClass("fixed");
+          }
+        });
+      });
+    </script>
+    <title>코딩리스트</title>
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>코딩리스트</h1>
+
+      <table id="tableTotal">
+        <caption>
+          Work Progress
+        </caption>
+        <colgroup>
+          <col width="6%" />
+          <col width="*" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th>Task</th>
+            <td>
+              <span class="done"></span>/<span class="undone"></span> :
+              <span class="total"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--table-->
+      <table id="tableSheet">
+        <caption>
+          Publishing
+        </caption>
+        <colgroup>
+          <col style="width: 12%" />
+          <col style="width: 12%" />
+          <col style="width: 8%" />
+          <col style="width: 15%" />
+          <col style="width: 20%" />
+          <col style="width: 10%" />
+          <col style="width: 5%" />
+          <col style="width: auto" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">1depth</th>
+            <th scope="col">2depth</th>
+            <th scope="col">3depth</th>
+            <th scope="col">화면명</th>
+            <th scope="col">파일명</th>
+            <th scope="col">업데이트일자</th>
+            <th scope="col">퍼블상태</th>
+            <th scope="col">비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="blue">
+            <td title="1depth"></td>
+            <td title="2depth"></td>
+            <td title="3depth"></td>
+            <td title="화면명"></td>
+            <td title="파일명">
+              <a href="index.html" target="_blank">index.html</a>
+            </td>
+            <td title="업데이트일자"></td>
+            <td title="퍼블상태" class="task done">
+              <span class="complete">○</span>
+            </td>
+            <td title="비고"></td>
+          </tr>
+        </tbody>
+      </table>
+      <!--//table-->
+      <div class="modify">
+        <h2></h2>
+        <p>총 페이지수 : <span id="spanTotalCount">0</span></p>
+      </div>
+    </div>
+  </body>
+</html>

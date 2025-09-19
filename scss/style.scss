@@ -1,0 +1,10 @@
+@use 'base/font';
+@use 'base/reset';
+@use 'base/common';
+@use 'layout/header';
+@use 'layout/footer';
+
+.text {
+    font-size: 20px;
+    color: #000;
+}

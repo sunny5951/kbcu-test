@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    @@include('include/head.html')
+  </head>
+  <body>
+    <div id="wrap">
+      <!--header-->
+      <!-- @@include('include/header.html') -->
+      <!--//header-->
+
+      <!--container-->
+      <main id="container">
+        <div class="radio-group-container">
+          <div class="radio-group">
+            <input type="radio" class="radio" name="gender" id="male" />
+            <label for="male" class="radio-label">남성</label>
+          </div>
+          <div class="radio-group">
+            <input type="radio" class="radio" name="gender" id="female" />
+            <label for="female" class="radio-label">여성</label>
+          </div>
+        </div>
+
+        <!-- 버튼 그룹 (수평) -->
+        <div class="radio-button-group">
+          <div class="radio-group">
+            <input type="radio" class="radio" name="tab" id="tab1" />
+            <label for="tab1" class="radio-label">탭 1</label>
+          </div>
+          <div class="radio-group">
+            <input type="radio" class="radio" name="tab" id="tab2" />
+            <label for="tab2" class="radio-label">탭 2</label>
+          </div>
+        </div>
+      </main>
+      <!--container-->
+
+      <!--footer-->
+      <!-- @@include('include/footer.html') -->
+      <!--//footer-->
+    </div>
+  </body>
+</html>

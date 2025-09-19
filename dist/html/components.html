@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>피그마 디자인 컴포넌트</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script
+      type="text/javascript"
+      src="../js/jquery/jquery-3.7.1.min.js"
+    ></script>
+    <script type="text/javascript" src="../js/cmn/common.js"></script>
+    <style>
+      body {
+        font-family: "Pretendard", sans-serif;
+        background-color: #f0f4f9;
+        margin: 0;
+        padding: 40px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #2e3340;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #0f4fea;
+      }
+
+      .subsection {
+        margin-bottom: 30px;
+      }
+
+      .subsection-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #414858;
+        margin-bottom: 15px;
+      }
+
+      .component-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .component-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 15px;
+        border: 1px solid #e8ecf0;
+        border-radius: 8px;
+        background: #fafbfc;
+      }
+
+      .component-label {
+        font-size: 12px;
+        color: #6c717b;
+        font-weight: 500;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .form-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #414858;
+        min-width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="text-align: center; color: #2e3340; margin-bottom: 40px">
+        피그마 디자인 컴포넌트
+      </h1>
+
+      <!-- BTN Section -->
+      <div class="section">
+        <h2 class="section-title">BTN</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Button Sizes</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <button class="btn btn-primary btn-small">Small</button>
+              <span class="component-label">Small</span>
+            </div>
+            <div class="component-item">
+              <button class="btn btn-primary btn-medium">Medium</button>
+              <span class="component-label">Medium</span>
+            </div>
+            <div class="component-item">
+              <button class="btn btn-primary btn-large">Large</button>
+              <span class="component-label">Large</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Button Types</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <button class="btn btn-primary btn-medium">Primary</button>
+              <span class="component-label">Primary</span>
+            </div>
+            <div class="component-item">
+              <button class="btn btn-line btn-medium">Line</button>
+              <span class="component-label">Line</span>
+            </div>
+            <div class="component-item">
+              <button class="btn btn-secondary btn-medium">Secondary</button>
+              <span class="component-label">Secondary</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Button States</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <button class="btn btn-primary btn-medium">Default</button>
+              <span class="component-label">Default</span>
+            </div>
+            <div class="component-item">
+              <button class="btn btn-primary btn-medium btn-active">
+                Active
+              </button>
+              <span class="component-label">Active</span>
+            </div>
+            <div class="component-item">
+              <button class="btn btn-primary btn-medium" disabled>
+                Disabled
+              </button>
+              <span class="component-label">Disabled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inputs Section -->
+      <div class="section">
+        <h2 class="section-title">Inputs</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Input States</h3>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Default State</label>
+                <div class="input input-default">
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Focused State</label>
+                <div class="input input-focused">
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Filled State</label>
+                <div class="input input-filled">
+                  <input type="text" value="입력된 텍스트" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Error State</label>
+                <div class="input input-error">
+                  <input type="text" placeholder="Placeholder" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Disabled State</label>
+                <div class="input input-disabled">
+                  <input type="text" placeholder="Placeholder" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls Section -->
+      <div class="section">
+        <h2 class="section-title">Controls</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Checkbox</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <input type="checkbox" class="checkbox" id="check-default" />
+              <span class="component-label">Default</span>
+            </div>
+            <div class="component-item">
+              <input
+                type="checkbox"
+                class="checkbox"
+                id="check-checked"
+                checked
+              />
+              <span class="component-label">Checked</span>
+            </div>
+            <div class="component-item">
+              <input type="checkbox" class="checkbox" id="check-focused" />
+              <span class="component-label">Focused</span>
+            </div>
+            <div class="component-item">
+              <input
+                type="checkbox"
+                class="checkbox"
+                id="check-disabled"
+                disabled
+              />
+              <span class="component-label">Disabled</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Radio</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <input
+                type="radio"
+                class="radio"
+                name="radio-demo"
+                id="radio-default"
+              />
+              <span class="component-label">Default</span>
+            </div>
+            <div class="component-item">
+              <input
+                type="radio"
+                class="radio"
+                name="radio-demo"
+                id="radio-checked"
+                checked
+              />
+              <span class="component-label">Checked</span>
+            </div>
+            <div class="component-item">
+              <input
+                type="radio"
+                class="radio"
+                name="radio-demo"
+                id="radio-focused"
+              />
+              <span class="component-label">Focused</span>
+            </div>
+            <div class="component-item">
+              <input
+                type="radio"
+                class="radio"
+                name="radio-demo"
+                id="radio-disabled"
+                disabled
+              />
+              <span class="component-label">Disabled</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Toggle</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <button class="toggle" id="toggle-off"></button>
+              <span class="component-label">Off</span>
+            </div>
+            <div class="component-item">
+              <button class="toggle toggle-on" id="toggle-on"></button>
+              <span class="component-label">On</span>
+            </div>
+            <div class="component-item">
+              <button
+                class="toggle toggle-disabled"
+                id="toggle-disabled"
+                disabled
+              ></button>
+              <span class="component-label">Disabled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Section -->
+      <div class="section">
+        <h2 class="section-title">Search</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Search States</h3>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Default Search</label>
+                <div class="search search-default">
+                  <input type="text" placeholder="검색어를 입력하세요" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Focused Search</label>
+                <div class="search search-focused">
+                  <input type="text" placeholder="검색어를 입력하세요" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Completed Search</label>
+                <div class="search search-completed">
+                  <input type="text" value="검색된 결과" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Disabled Search</label>
+                <div class="search search-disabled">
+                  <input
+                    type="text"
+                    placeholder="검색어를 입력하세요"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Select Section -->
+      <div class="section">
+        <h2 class="section-title">Select</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Select States</h3>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="select-group">
+                <label class="select-label">Default Select</label>
+                <div class="select">
+                  <select>
+                    <option value="">Placeholder</option>
+                    <option value="1">옵션 1</option>
+                    <option value="2">옵션 2</option>
+                    <option value="3">옵션 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="select-group">
+                <label class="select-label">Focused Select</label>
+                <div class="select select-focused">
+                  <select>
+                    <option value="">선택</option>
+                    <option value="1">옵션 1</option>
+                    <option value="2">옵션 2</option>
+                    <option value="3">옵션 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="select-group">
+                <label class="select-label">Filled Select</label>
+                <div class="select select-filled">
+                  <select>
+                    <option value="2">선택된 옵션</option>
+                    <option value="1">옵션 1</option>
+                    <option value="2">옵션 2</option>
+                    <option value="3">옵션 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="select-group">
+                <label class="select-label">Disabled Select</label>
+                <div class="select select-disabled">
+                  <select disabled>
+                    <option value="">비활성화</option>
+                    <option value="1">옵션 1</option>
+                    <option value="2">옵션 2</option>
+                    <option value="3">옵션 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination Section -->
+      <div class="section">
+        <h2 class="section-title">Pagination</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Pagination Controls</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <div class="pagination">
+                <button
+                  class="pagination-btn pagination-prev-fast"
+                  title="첫 페이지"
+                >
+                  &lt;&lt;
+                </button>
+                <button
+                  class="pagination-btn pagination-prev"
+                  title="이전 페이지"
+                >
+                  &lt;
+                </button>
+                <button class="pagination-btn pagination-num pagination-active">
+                  1
+                </button>
+                <button class="pagination-btn pagination-num">2</button>
+                <button class="pagination-btn pagination-num medium">3</button>
+                <button class="pagination-btn pagination-num">4</button>
+                <button class="pagination-btn pagination-num">5</button>
+                <button class="pagination-btn pagination-num medium">6</button>
+                <button class="pagination-btn pagination-num">7</button>
+                <button class="pagination-btn pagination-num">8</button>
+                <button class="pagination-btn pagination-num">9</button>
+                <button class="pagination-btn pagination-num wide">10</button>
+                <button
+                  class="pagination-btn pagination-next"
+                  title="다음 페이지"
+                >
+                  &gt;
+                </button>
+                <button
+                  class="pagination-btn pagination-next-fast"
+                  title="마지막 페이지"
+                >
+                  &gt;&gt;
+                </button>
+              </div>
+              <span class="component-label">피그마 디자인 페이지네이션</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Label Section -->
+      <div class="section">
+        <h2 class="section-title">Label</h2>
+
+        <div class="subsection">
+          <h3 class="subsection-title">Label Types</h3>
+          <div class="component-group">
+            <div class="component-item">
+              <div class="label label-blue">정상</div>
+              <span class="component-label">Blue</span>
+            </div>
+            <div class="component-item">
+              <div class="label label-red">탈퇴</div>
+              <span class="component-label">Red</span>
+            </div>
+            <div class="component-item">
+              <div class="label label-green">승인</div>
+              <span class="component-label">Green</span>
+            </div>
+            <div class="component-item">
+              <div class="label label-gray">미승인</div>
+              <span class="component-label">Gray</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 피그마 Select 초기화
+      document.addEventListener("DOMContentLoaded", function () {
+        // 피그마 select 요소들도 초기화
+        initSelect();
+      });
+
+      // Toggle Button Functionality
+      document.querySelectorAll(".toggle").forEach((toggle) => {
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          if (this.disabled) return;
+
+          this.classList.toggle("toggle-on");
+        });
+      });
+    </script>
+  </body>
+</html>

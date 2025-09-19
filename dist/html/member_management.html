@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원관리 - 관리자페이지</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        background-color: #f0f4f9;
+        color: #2e3340;
+        line-height: 1.5;
+      }
+
+      .container {
+        display: flex;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* 헤더 - 최상단 고정 */
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        background-color: #ffffff;
+        border-bottom: 1px solid #eaeef4;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        z-index: 1000;
+        box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
+      }
+
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo-icon {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-symbol {
+        width: 100%;
+        height: 100%;
+      }
+
+      .logo-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .logo-main {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2e3340;
+        line-height: 1.2;
+      }
+
+      .logo-sub {
+        font-size: 12px;
+        font-weight: 500;
+        color: #6c717b;
+        line-height: 1.2;
+      }
+
+      .admin-mark {
+        background-color: #f0f4f9;
+        color: #6c717b;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .header-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      .header-btn {
+        width: 50px;
+        height: 50px;
+        background-color: #f0f4f9;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s;
+      }
+
+      .header-btn:hover {
+        background-color: #e8ecf0;
+      }
+
+      .btn-icon {
+        width: 30px;
+        height: 30px;
+      }
+
+      /* 사이드바 */
+      .sidebar {
+        width: 250px;
+        background-color: #091833;
+        color: white;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+        z-index: 999;
+        padding: 30px 20px 0 20px;
+      }
+
+      .menu-group {
+        margin-bottom: 0;
+      }
+
+      .menu-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .sidebar-menu {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .menu-item {
+        height: 58px;
+        padding: 0 20px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #c7cacf;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: "Pretendard", sans-serif;
+        border-radius: 0;
+      }
+
+      .menu-item:hover {
+        background-color: transparent;
+      }
+
+      .menu-item.active {
+        background-color: transparent;
+        color: #c7cacf;
+      }
+
+      .has-submenu {
+        position: relative;
+        background-color: transparent;
+        border-radius: 20px 20px 0 0;
+        color: #c7cacf;
+        font-weight: 500;
+      }
+
+      .has-submenu:hover {
+        background-color: transparent;
+      }
+
+      .has-submenu.open {
+        background-color: #0f4fea;
+        color: white;
+        font-weight: 700;
+      }
+
+      .has-submenu.open:hover {
+        background-color: #0f4fea;
+      }
+
+      .submenu-arrow {
+        transition: transform 0.3s ease;
+        width: 14px;
+        height: 7px;
+      }
+
+      .has-submenu.open .submenu-arrow {
+        transform: rotate(180deg);
+      }
+
+      .menu-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      }
+
+      .submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background-color: #15243f;
+        border-radius: 0 0 20px 20px;
+        margin-bottom: 0;
+      }
+
+      .submenu.open {
+        max-height: 200px;
+      }
+
+      .submenu-item {
+        height: 58px;
+        padding: 0 20px 0 20px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: "Pretendard", sans-serif;
+        border-left: none;
+        position: relative;
+      }
+
+      .submenu-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 20px;
+        right: 0;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .submenu-item:hover {
+        background-color: transparent;
+        color: white;
+      }
+
+      .submenu-item.active {
+        background-color: transparent;
+        color: white;
+        border-left: none;
+      }
+
+      .submenu-item:not(.active) {
+        opacity: 0.6;
+      }
+
+      .icon-dot {
+        width: 4px;
+        height: 4px;
+        margin-right: 8px;
+        background-color: white;
+        border-radius: 50%;
+      }
+
+      .submenu-item .arrow-icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* 메인 콘텐츠 */
+      .main-content {
+        margin-left: 250px;
+        margin-top: 70px;
+        flex: 1;
+        padding: 40px 50px 50px 50px;
+        background-color: #f0f4f9;
+      }
+
+      .page-title {
+        font-size: 30px;
+        font-weight: 800;
+        color: #2e3340;
+        margin-bottom: 20px;
+      }
+
+      .content-box {
+        background-color: white;
+        border-radius: 20px;
+        padding: 50px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      /* 검색 영역 */
+      .search-area {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 30px;
+      }
+
+      .select-box {
+        background-color: white;
+        border: 1px solid #d1d6dd;
+        border-radius: 24px;
+        padding: 12px 20px;
+        width: 150px;
+        height: 48px;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .select-box::after {
+        content: "▼";
+        font-size: 12px;
+        color: #6c717b;
+      }
+
+      .search-box {
+        background-color: white;
+        border: 1px solid #d1d6dd;
+        border-radius: 24px;
+        padding: 12px 20px;
+        width: 320px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .search-box input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 16px;
+        color: #2e3340;
+      }
+
+      .search-box input::placeholder {
+        color: #6c717b;
+      }
+
+      .search-icon {
+        width: 16px;
+        height: 16px;
+        border: 1px solid #414858;
+        border-radius: 50%;
+        position: relative;
+      }
+
+      .search-icon::after {
+        content: "";
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        width: 6px;
+        height: 2px;
+        background-color: #414858;
+        transform: rotate(45deg);
+      }
+
+      /* 테이블 */
+      .table-container {
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        background-color: white;
+      }
+
+      .table-header {
+        background-color: #f0f4f9;
+        display: flex;
+        height: 50px;
+        border-radius: 8px 8px 0 0;
+      }
+
+      .table-header .cell {
+        padding: 8px 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #2e3340;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: "Pretendard", sans-serif;
+      }
+
+      .table-header .cell:first-child {
+        width: 50px;
+        min-width: 50px;
+      }
+
+      .table-header .cell:nth-child(2) {
+        width: 100px;
+        min-width: 100px;
+      }
+
+      .table-header .cell:nth-child(3) {
+        width: 180px;
+        min-width: 180px;
+      }
+
+      .table-header .cell:nth-child(n + 4) {
+        flex: 1;
+        min-width: 228px;
+      }
+
+      .table-header .cell:last-child {
+        border-right: none;
+      }
+
+      .table-body {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .table-row {
+        display: flex;
+        transition: background-color 0.2s;
+        min-height: 50px;
+      }
+
+      .table-row:nth-child(even) {
+        background-color: rgba(236, 239, 253, 0.35);
+      }
+
+      .table-row:hover {
+        background-color: #f8f9ff;
+      }
+
+      .table-row .cell {
+        padding: 10px 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #414858;
+        font-size: 16px;
+        font-family: "Pretendard", sans-serif;
+        font-weight: 400;
+      }
+
+      .table-row .cell:first-child {
+        width: 50px;
+        min-width: 50px;
+        padding: 8px 10px;
+      }
+
+      .table-row .cell:nth-child(2) {
+        width: 100px;
+        min-width: 100px;
+      }
+
+      .table-row .cell:nth-child(3) {
+        width: 180px;
+        min-width: 180px;
+        padding: 10px;
+      }
+
+      .table-row .cell:nth-child(n + 4) {
+        flex: 1;
+        min-width: 228px;
+      }
+
+      .table-row:last-child {
+        border-bottom: 1px solid #d1d6dd;
+      }
+
+      .checkbox {
+        width: 20px;
+        height: 20px;
+        border: 1.5px solid #d1d6dd;
+        border-radius: 6px;
+        background-color: white;
+        cursor: pointer;
+        position: relative;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .checkbox:hover {
+        border-color: #0f4fea;
+      }
+
+      .checkbox:checked {
+        background-color: #0f4fea;
+        border-color: #0f4fea;
+        background-image: url("../images/icon/checkbox-checked.svg");
+        background-size: 16px 16px;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .checkbox:checked:hover {
+        background-color: #0d42c7;
+        border-color: #0d42c7;
+      }
+
+      .checkbox:focus {
+        border-color: #0f4fea;
+        box-shadow: 0 0 0 2px rgba(15, 79, 234, 0.2);
+      }
+
+      .checkbox:disabled {
+        background-color: #d9dce1;
+        border-color: #d1d6dd;
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      .checkbox:disabled:checked {
+        background-color: #d9dce1;
+        border-color: #d1d6dd;
+        background-image: url("../images/icon/checkbox-disabled.svg");
+        background-size: 16px 16px;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .status-badge {
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 50px;
+        height: 24px;
+        font-family: "Pretendard", sans-serif;
+      }
+
+      .status-normal {
+        background-color: #e4efff;
+        color: #0f4fea;
+      }
+
+      .status-withdrawn {
+        background-color: #ffeded;
+        color: #eb003b;
+      }
+
+      /* 페이지네이션 */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pagination-btn {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #dfdfdf;
+        background-color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        transition: all 0.2s;
+        color: #414858;
+      }
+
+      .pagination-btn:hover {
+        background-color: #f0f4f9;
+      }
+
+      .pagination-btn.active {
+        background-color: #0f4fea;
+        color: white;
+        border-color: #0f4fea;
+      }
+
+      .pagination-btn.arrow {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      .pagination-icon {
+        width: 24px;
+        height: 24px;
+        opacity: 0.4;
+      }
+
+      .pagination-btn.arrow:hover .pagination-icon {
+        opacity: 0.8;
+      }
+
+      /* 반응형 */
+      @media (max-width: 1200px) {
+        .table-header .cell:first-child {
+          width: 40px;
+          min-width: 40px;
+        }
+
+        .table-header .cell:nth-child(2) {
+          width: 80px;
+          min-width: 80px;
+        }
+
+        .table-header .cell:nth-child(3) {
+          width: 150px;
+          min-width: 150px;
+        }
+
+        .table-header .cell:nth-child(n + 4) {
+          min-width: 180px;
+        }
+
+        .table-row .cell:first-child {
+          width: 40px;
+          min-width: 40px;
+        }
+
+        .table-row .cell:nth-child(2) {
+          width: 80px;
+          min-width: 80px;
+        }
+
+        .table-row .cell:nth-child(3) {
+          width: 150px;
+          min-width: 150px;
+        }
+
+        .table-row .cell:nth-child(n + 4) {
+          min-width: 180px;
+        }
+
+        .search-area {
+          flex-direction: column;
+        }
+
+        .search-box {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+          transition: transform 0.3s;
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .table-container {
+          overflow-x: auto;
+        }
+
+        .table-header,
+        .table-row {
+          min-width: 800px;
+        }
+
+        .table-header .cell,
+        .table-row .cell {
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+
+        .status-badge {
+          font-size: 14px;
+          min-width: 40px;
+          height: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 헤더 -->
+      <header class="header">
+        <div class="logo-area">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <img
+                src="../images/icon/icon-logo.svg"
+                alt="서울북부고속도로 로고"
+                class="logo-symbol"
+              />
+            </div>
+            <div class="logo-text">
+              <div class="logo-main">서울북부고속도로</div>
+              <div class="logo-sub">SEOUL NORTHERN HIGHWAY CORPORATION</div>
+            </div>
+          </div>
+          <div class="admin-mark">관리자페이지</div>
+        </div>
+        <div class="header-buttons">
+          <button class="header-btn" title="사용자">
+            <img
+              src="../images/icon/button-user.svg"
+              alt="사용자"
+              class="btn-icon"
+            />
+          </button>
+          <button class="header-btn" title="로그아웃">
+            <img
+              src="../images/icon/button-logout.svg"
+              alt="로그아웃"
+              class="btn-icon"
+            />
+          </button>
+        </div>
+      </header>
+
+      <!-- 사이드바 -->
+      <nav class="sidebar">
+        <div class="sidebar-menu">
+          <!-- 사용자 관리 메뉴 -->
+          <div class="menu-group">
+            <div
+              class="menu-item has-submenu open"
+              data-submenu="user-management"
+            >
+              <div style="display: flex; align-items: center">
+                <img
+                  src="../images/icon/ico-menu-user.svg"
+                  alt="사용자 아이콘"
+                  class="menu-icon"
+                />
+                <span>사용자 관리</span>
+              </div>
+              <img
+                src="../images/icon/ico-arrow-up.svg"
+                alt="화살표 위"
+                class="arrow-icon submenu-arrow"
+              />
+            </div>
+            <div class="submenu open" id="user-management">
+              <div class="submenu-item active">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>회원관리</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+              <div class="submenu-item">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>관리자 관리</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 메인화면 관리 메뉴 -->
+          <div class="menu-group">
+            <div class="menu-item has-submenu" data-submenu="main-management">
+              <div style="display: flex; align-items: center">
+                <img
+                  src="../images/icon/ico-menu-popup.svg"
+                  alt="팝업 아이콘"
+                  class="menu-icon"
+                />
+                <span>메인화면 관리</span>
+              </div>
+              <img
+                src="../images/icon/ico-arrow-up.svg"
+                alt="화살표 위"
+                class="arrow-icon submenu-arrow"
+              />
+            </div>
+            <div class="submenu" id="main-management">
+              <div class="submenu-item">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>팝업 관리</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+              <div class="submenu-item">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>배너 관리</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 홈페이지 관리 메뉴 -->
+          <div class="menu-group">
+            <div
+              class="menu-item has-submenu"
+              data-submenu="homepage-management"
+            >
+              <div style="display: flex; align-items: center">
+                <img
+                  src="../images/icon/ico-menu-board.svg"
+                  alt="보드 아이콘"
+                  class="menu-icon"
+                />
+                <span>홈페이지 관리</span>
+              </div>
+              <img
+                src="../images/icon/ico-arrow-up.svg"
+                alt="화살표 위"
+                class="arrow-icon submenu-arrow"
+              />
+            </div>
+            <div class="submenu" id="homepage-management">
+              <div class="submenu-item">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>공지사항</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+              <div class="submenu-item">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>FAQ</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+              <div class="submenu-item">
+                <div style="display: flex; align-items: center">
+                  <div class="icon-dot"></div>
+                  <span>문의사항</span>
+                </div>
+                <img
+                  src="../images/icon/ico-arrow-right.svg"
+                  alt="화살표 오른쪽"
+                  class="arrow-icon"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 메인 콘텐츠 -->
+      <main class="main-content">
+        <h1 class="page-title">회원관리</h1>
+
+        <div class="content-box">
+          <!-- 검색 영역 -->
+          <div class="search-area">
+            <div class="select-box">
+              <span>상태</span>
+            </div>
+            <div class="search-box">
+              <div class="search-icon"></div>
+              <input type="text" placeholder="검색어 입력" />
+            </div>
+          </div>
+
+          <!-- 테이블 -->
+          <div class="table-container">
+            <!-- 테이블 헤더 -->
+            <div class="table-header">
+              <div class="cell">
+                <input type="checkbox" class="checkbox" />
+              </div>
+              <div class="cell">순번</div>
+              <div class="cell">회원상태</div>
+              <div class="cell">회원유형</div>
+              <div class="cell">아이디</div>
+              <div class="cell">사업자명</div>
+              <div class="cell">가입일자</div>
+              <div class="cell">탈퇴일자</div>
+            </div>
+
+            <!-- 테이블 바디 -->
+            <div class="table-body">
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" checked />
+                </div>
+                <div class="cell">49</div>
+                <div class="cell">
+                  <span class="status-badge status-withdrawn">탈퇴</span>
+                </div>
+                <div class="cell">법인 사업자</div>
+                <div class="cell">test1234</div>
+                <div class="cell">서울시청</div>
+                <div class="cell">2025-10-24</div>
+                <div class="cell">2025-10-25</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+              <div class="table-row">
+                <div class="cell">
+                  <input type="checkbox" class="checkbox" />
+                </div>
+                <div class="cell">50</div>
+                <div class="cell">
+                  <span class="status-badge status-normal">정상</span>
+                </div>
+                <div class="cell">개인 사업자</div>
+                <div class="cell">abcd1234</div>
+                <div class="cell">구리포천</div>
+                <div class="cell">2025-10-25</div>
+                <div class="cell">-</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 페이지네이션 -->
+          <div class="pagination">
+            <button class="pagination-btn arrow" title="첫 페이지">
+              <img
+                src="../images/icon/icon-arrow-prev-first.svg"
+                alt="첫 페이지"
+                class="pagination-icon"
+              />
+            </button>
+            <button class="pagination-btn arrow" title="이전 페이지">
+              <img
+                src="../images/icon/icon-arrow-prev.svg"
+                alt="이전 페이지"
+                class="pagination-icon"
+              />
+            </button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+            <button class="pagination-btn">6</button>
+            <button class="pagination-btn">7</button>
+            <button class="pagination-btn">8</button>
+            <button class="pagination-btn">9</button>
+            <button class="pagination-btn">10</button>
+            <button class="pagination-btn arrow" title="다음 페이지">
+              <img
+                src="../images/icon/icon-arrow-prev-next.svg"
+                alt="다음 페이지"
+                class="pagination-icon"
+              />
+            </button>
+            <button class="pagination-btn arrow" title="마지막 페이지">
+              <img
+                src="../images/icon/icon-arrow-prev-last.svg"
+                alt="마지막 페이지"
+                class="pagination-icon"
+              />
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // 체크박스 전체 선택/해제
+      document
+        .querySelector(".table-header .checkbox")
+        .addEventListener("change", function () {
+          const checkboxes = document.querySelectorAll(".table-body .checkbox");
+          checkboxes.forEach((checkbox) => {
+            checkbox.checked = this.checked;
+          });
+        });
+
+      // 개별 체크박스 변경 시 전체 선택 체크박스 상태 업데이트
+      document.querySelectorAll(".table-body .checkbox").forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          const allCheckboxes = document.querySelectorAll(
+            ".table-body .checkbox"
+          );
+          const checkedCheckboxes = document.querySelectorAll(
+            ".table-body .checkbox:checked"
+          );
+          const headerCheckbox = document.querySelector(
+            ".table-header .checkbox"
+          );
+
+          if (checkedCheckboxes.length === allCheckboxes.length) {
+            headerCheckbox.checked = true;
+            headerCheckbox.indeterminate = false;
+          } else if (checkedCheckboxes.length === 0) {
+            headerCheckbox.checked = false;
+            headerCheckbox.indeterminate = false;
+          } else {
+            headerCheckbox.checked = false;
+            headerCheckbox.indeterminate = true;
+          }
+        });
+      });
+
+      // 페이지네이션 버튼 클릭 이벤트
+      document.querySelectorAll(".pagination-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          // 현재 활성 페이지 버튼에서 active 클래스 제거
+          document
+            .querySelector(".pagination-btn.active")
+            .classList.remove("active");
+
+          // 클릭된 버튼에 active 클래스 추가 (숫자 버튼인 경우만)
+          if (!this.classList.contains("arrow")) {
+            this.classList.add("active");
+          }
+        });
+      });
+
+      // 아코디언 메뉴 기능
+      document.querySelectorAll(".has-submenu").forEach((menuItem) => {
+        menuItem.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const submenuId = this.getAttribute("data-submenu");
+          const submenu = document.getElementById(submenuId);
+          const arrow = this.querySelector(".submenu-arrow");
+
+          // 현재 메뉴가 열려있는지 확인
+          const isOpen = this.classList.contains("open");
+
+          // 모든 메뉴 닫기
+          document.querySelectorAll(".has-submenu").forEach((item) => {
+            item.classList.remove("open");
+            const itemSubmenuId = item.getAttribute("data-submenu");
+            const itemSubmenu = document.getElementById(itemSubmenuId);
+            if (itemSubmenu) {
+              itemSubmenu.classList.remove("open");
+            }
+          });
+
+          // 클릭된 메뉴가 닫혀있었다면 열기
+          if (!isOpen) {
+            this.classList.add("open");
+            submenu.classList.add("open");
+          }
+        });
+      });
+
+      // 서브메뉴 아이템 클릭 이벤트
+      document.querySelectorAll(".submenu-item").forEach((item) => {
+        item.addEventListener("click", function (e) {
+          e.stopPropagation();
+
+          // 모든 서브메뉴 아이템에서 active 클래스 제거
+          document
+            .querySelectorAll(".submenu-item")
+            .forEach((subItem) => subItem.classList.remove("active"));
+
+          // 클릭된 서브메뉴 아이템에 active 클래스 추가
+          this.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
