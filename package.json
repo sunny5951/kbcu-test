@@ -4,7 +4,9 @@
   "description": "Final Gulp project with font integration and SCSS build",
   "scripts": {
     "start": "gulp",
-    "build": "NODE_ENV=production gulp build"
+    "build": "NODE_ENV=production gulp build",
+    "serve": "node server.js",
+    "dev": "python3 -m http.server 8000"
   },
   "devDependencies": {
     "browser-sync": "^2.29.3",
@@ -20,6 +22,7 @@
   },
   "type": "module",
   "dependencies": {
+    "express": "^5.1.0",
     "sharp": "^0.34.3"
   }
 }

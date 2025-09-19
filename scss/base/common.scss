@@ -1075,10 +1075,8 @@
             font-weight: 600;
         }
     }
-}
 
-.select-hide {
-    .select-items {
+    &.select-hide {
         display: none;
     }
 }

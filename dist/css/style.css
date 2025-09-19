@@ -1227,8 +1227,7 @@ b {
   color: #0f4fea;
   font-weight: 600;
 }
-
-.select-hide .select-items {
+.select-items.select-hide {
   display: none;
 }
 
@@ -2334,4 +2333,330 @@ footer {
 .text {
   font-size: 20px;
   color: #000;
+}
+
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f0f4f9;
+}
+
+.admin-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeef4;
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
+  height: 70px;
+}
+.admin-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 100%;
+}
+.admin-header .logo-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.admin-header .logo img {
+  height: 30px;
+}
+.admin-header .admin-mark {
+  background-color: #f0f4f9;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c717b;
+}
+.admin-header .btn-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.admin-header .btn-icon {
+  width: 50px;
+  height: 50px;
+  background-color: #f0f4f9;
+  border: none;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.admin-header .btn-icon:hover {
+  background-color: #eaeef4;
+}
+.admin-header .btn-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.admin-sidebar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 70px);
+  background-color: #091833;
+  padding: 30px 20px 0;
+  z-index: 999;
+}
+.admin-sidebar .sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.admin-sidebar .nav-item {
+  margin-bottom: 0;
+}
+.admin-sidebar .nav-item.active .nav-main {
+  background-color: #0f4fea;
+}
+.admin-sidebar .nav-item.active .nav-text {
+  color: #ffffff;
+  font-weight: 700;
+}
+.admin-sidebar .nav-item.active .nav-sub {
+  display: block;
+}
+.admin-sidebar .nav-item:not(.active) .nav-main {
+  background-color: transparent;
+}
+.admin-sidebar .nav-item:not(.active) .nav-main:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.admin-sidebar .nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 58px;
+}
+.admin-sidebar .nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-sidebar .nav-icon img {
+  width: 24px;
+  height: 24px;
+}
+.admin-sidebar .nav-text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #c7cacf;
+  flex: 1;
+  margin-left: 8px;
+}
+.admin-sidebar .nav-arrow {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.admin-sidebar .nav-arrow img {
+  width: 16px;
+  height: 16px;
+}
+.admin-sidebar .nav-sub {
+  background-color: #15243f;
+  border-radius: 0 0 20px 20px;
+  padding: 0 20px 10px;
+  display: none;
+}
+.admin-sidebar .nav-sub-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.6;
+}
+.admin-sidebar .nav-sub-item.active {
+  opacity: 1;
+}
+.admin-sidebar .nav-sub-item:hover {
+  opacity: 1;
+}
+.admin-sidebar .nav-sub-item span {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  flex: 1;
+}
+.admin-sidebar .nav-sub-dot {
+  width: 4px;
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.admin-sidebar .nav-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.14);
+  margin: 0 8px;
+}
+
+.admin-main {
+  margin-left: 250px;
+  margin-top: 70px;
+  padding: 40px 50px 50px;
+  min-height: calc(100vh - 70px);
+}
+.admin-main .page-header {
+  margin-bottom: 16px;
+}
+.admin-main .page-title {
+  font-family: "Pretendard", sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: #2e3340;
+  margin: 0;
+}
+
+.content-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.content-box .required-note {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  justify-content: flex-end;
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+.content-box .required-note .required-mark {
+  color: #e21f1f;
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+.content-box .required-note span:last-child {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #414858;
+}
+
+.form-table {
+  border: 1px solid #d1d6dd;
+  border-radius: 0;
+  margin-top: 24px;
+}
+.form-table .form-row {
+  display: flex;
+  border-bottom: 1px solid #d1d6dd;
+  min-height: 80px;
+}
+.form-table .form-row:last-child {
+  border-bottom: none;
+}
+.form-table .form-label-cell {
+  width: 140px;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-right: 1px solid #d1d6dd;
+  min-height: 80px;
+}
+.form-table .form-label-cell .label-text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e3340;
+}
+.form-table .form-input-cell {
+  flex: 1;
+  padding: 16px 20px;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+.form-table .form-input-cell .input-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-table .form-input-cell .input-group .input {
+  width: 450px;
+}
+.form-table .form-input-cell .error-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+.form-table .form-input-cell .error-message img {
+  width: 20px;
+  height: 20px;
+}
+.form-table .form-input-cell .error-message span {
+  font-family: "Pretendard", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6c717b;
+}
+
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+.form-actions .btn {
+  width: 180px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn-sm {
+  width: 84px;
+  height: 34px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0;
+}
+
+.figma-select {
+  position: relative;
+  width: 200px;
+}
+.figma-select select {
+  display: none;
+}
+.figma-select select:focus {
+  outline: none;
+  background-color: #ffffff;
+  border: 1px solid #0f4fea;
 }

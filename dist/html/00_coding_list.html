@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <style>
-      /* reset */
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"><meta http-equiv="X-UA-Compatible" content="ie=edge"><style>/* reset */
       html,
       body,
       div,
@@ -223,12 +213,7 @@
       }
       .modify h2 {
         margin-bottom: 3px;
-      }
-    </style>
-    <!-- script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript">
-      $(window).load(function () {
+      }</style><!-- script --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script><script type="text/javascript">$(window).load(function () {
         // Work Progress
         var arrTitle = new Array("task", "dev");
         var intDone, intUnDone, intTotal;
@@ -258,81 +243,4 @@
             $(".navList").removeClass("fixed");
           }
         });
-      });
-    </script>
-    <title>코딩리스트</title>
-  </head>
-  <body>
-    <div id="wrap">
-      <h1>코딩리스트</h1>
-
-      <table id="tableTotal">
-        <caption>
-          Work Progress
-        </caption>
-        <colgroup>
-          <col width="6%" />
-          <col width="*" />
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>Task</th>
-            <td>
-              <span class="done"></span>/<span class="undone"></span> :
-              <span class="total"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!--table-->
-      <table id="tableSheet">
-        <caption>
-          Publishing
-        </caption>
-        <colgroup>
-          <col style="width: 12%" />
-          <col style="width: 12%" />
-          <col style="width: 8%" />
-          <col style="width: 15%" />
-          <col style="width: 20%" />
-          <col style="width: 10%" />
-          <col style="width: 5%" />
-          <col style="width: auto" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col">1depth</th>
-            <th scope="col">2depth</th>
-            <th scope="col">3depth</th>
-            <th scope="col">화면명</th>
-            <th scope="col">파일명</th>
-            <th scope="col">업데이트일자</th>
-            <th scope="col">퍼블상태</th>
-            <th scope="col">비고</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="blue">
-            <td title="1depth"></td>
-            <td title="2depth"></td>
-            <td title="3depth"></td>
-            <td title="화면명"></td>
-            <td title="파일명">
-              <a href="index.html" target="_blank">index.html</a>
-            </td>
-            <td title="업데이트일자"></td>
-            <td title="퍼블상태" class="task done">
-              <span class="complete">○</span>
-            </td>
-            <td title="비고"></td>
-          </tr>
-        </tbody>
-      </table>
-      <!--//table-->
-      <div class="modify">
-        <h2></h2>
-        <p>총 페이지수 : <span id="spanTotalCount">0</span></p>
-      </div>
-    </div>
-  </body>
-</html>
+      });</script><title>코딩리스트</title></head><body><div id="wrap"><h1>코딩리스트</h1><table id="tableTotal"><caption>Work Progress</caption><colgroup><col width="6%"><col width="*"></colgroup><tbody><tr><th>Task</th><td><span class="done"></span>/<span class="undone"></span> : <span class="total"></span></td></tr></tbody></table><!--table--><table id="tableSheet"><caption>Publishing</caption><colgroup><col style="width: 12%"><col style="width: 12%"><col style="width: 8%"><col style="width: 15%"><col style="width: 20%"><col style="width: 10%"><col style="width: 5%"><col style="width: auto"></colgroup><thead><tr><th scope="col">1depth</th><th scope="col">2depth</th><th scope="col">3depth</th><th scope="col">화면명</th><th scope="col">파일명</th><th scope="col">업데이트일자</th><th scope="col">퍼블상태</th><th scope="col">비고</th></tr></thead><tbody><tr class="blue"><td title="1depth"></td><td title="2depth"></td><td title="3depth"></td><td title="화면명"></td><td title="파일명"><a href="index.html" target="_blank">index.html</a></td><td title="업데이트일자"></td><td title="퍼블상태" class="task done"><span class="complete">○</span></td><td title="비고"></td></tr></tbody></table><!--//table--><div class="modify"><h2></h2><p>총 페이지수 : <span id="spanTotalCount">0</span></p></div></div></body></html>
